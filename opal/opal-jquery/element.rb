@@ -69,6 +69,7 @@ class Element < `dom_class`
 
   # We alias some jquery methods to common ruby method names.
   alias succ next
+  alias prev pred
   alias << append
 
   # Here we map the remaining jquery methods, but change their names to
@@ -94,6 +95,7 @@ class Element < `dom_class`
   alias_native :fade_toggle, :fadeToggle
   alias_native :height=, :height
   alias_native :width=, :width
+  alias_native :at, :get
 
   def to_n
     self
@@ -117,25 +119,6 @@ class Element < `dom_class`
 
   def append_to_head
     `self.appendTo(document.head)`
-  end
-
-  # Returns the element at the given index as a new `DOM` instance.
-  # Negative indexes can be used and are counted from the end. If the
-  # given index is outside the range then `nil` is returned.
-  def at(index)
-    %x{
-      var length = self.length;
-
-      if (index < 0) {
-        index += length;
-      }
-
-      if (index < 0 || index >= length) {
-        return nil;
-      }
-
-      return $(self[index]);
-    }
   end
 
   # Returns the CSS class name of the firt element in self collection.
