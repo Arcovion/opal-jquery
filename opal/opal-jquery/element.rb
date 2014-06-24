@@ -69,7 +69,7 @@ class Element < `dom_class`
 
   # We alias some jquery methods to common ruby method names.
   alias succ next
-  alias prev pred
+  alias pred prev
   alias << append
 
   # Here we map the remaining jquery methods, but change their names to
